@@ -1,0 +1,2 @@
+# status
+Display system infos
