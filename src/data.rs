@@ -6,7 +6,7 @@ pub struct Data {
 }
 
 impl Data {
-    pub fn get(raw: Vec<(&str, &str)>) -> Data {
+    pub fn get(raw: &Vec<(&str, &str)>) -> Data {
         let mut entries: Vec<Entry> = vec![];
 
         for (name, path) in raw {
