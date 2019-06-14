@@ -1,19 +1,23 @@
 extern crate status;
 
-use status::{DATA, Data, Entry};
+use status::{data, Reading};
 use std::{thread, time};
 
 fn main() {
-    let raw = DATA.to_vec();
+    let data = data();
 
     loop {
-        refresh(Data::get(&raw));
+        clear();
+
+        for datum in &data {
+            println!("{}", Reading::from(datum.0, datum.1, datum.2));
+        }
+
         thread::sleep(time::Duration::from_secs(1));
     }
 }
 
-fn refresh(data: Data) {
+fn clear() {
     print!("{}[2J", 27 as char);
     print!("{}[H", 27 as char);
-    println!("{}", data);
 }

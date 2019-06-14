@@ -1,13 +1,5 @@
 mod config;
-mod data;
+mod reading;
 
-pub use config::DATA;
-pub use data::{Data, Entry};
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+pub use config::data;
+pub use reading::Reading;
