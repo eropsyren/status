@@ -2,7 +2,6 @@ extern crate status;
 
 use status::{DATA, Data, Entry};
 use std::{thread, time};
-use std::io::{Write, stdout};
 
 fn main() {
     let raw = DATA.to_vec();
