@@ -1,4 +1,4 @@
 /target
 **/*.rs.bk
 Cargo.lock
-/src/config.rs
+src/config.rs
