@@ -11,7 +11,10 @@ pub struct Reading {
 impl Reading {
     pub fn from(tag: &str, path: &str, mapping: &dyn Fn(String) -> String) -> Reading {
         let tag = String::from(tag);
-        let reading = fs::read_to_string(path).expect(&format!("error reading file: {}", path));
+        let reading = match fs::read_to_string(path) {
+            Ok(val) => val,
+            Err(_) => String::from("Not Found"),
+        };
         let value = mapping(String::from(reading.trim()));
 
         Reading { tag, value }
