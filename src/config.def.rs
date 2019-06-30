@@ -1,4 +1,5 @@
 pub const SEPARATOR: &'static str = ": ";
+pub const FNF: &'static str = "---";
 
 pub fn data<'a>() -> Vec<(&'a str, &'a str, &'a dyn Fn(String) -> String)> {
 
