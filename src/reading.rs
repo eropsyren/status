@@ -2,6 +2,7 @@ use std::fmt;
 use std::fs;
 
 use crate::config::SEPARATOR;
+use crate::config::FNF;
 
 pub struct Reading {
     tag: String,
@@ -13,9 +14,13 @@ impl Reading {
         let tag = String::from(tag);
         let reading = match fs::read_to_string(path) {
             Ok(val) => val,
-            Err(_) => String::from("Not Found"),
+            Err(_) => String::from(FNF),
         };
-        let value = mapping(String::from(reading.trim()));
+        let value = if reading != FNF {
+            mapping(String::from(reading.trim()))
+        } else {
+            String::from(FNF)
+        };
 
         Reading { tag, value }
     }
