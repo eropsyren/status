@@ -8,6 +8,7 @@ use crate::data::Data;
 pub struct Reading {
     tag: &'static str,
     value: String,
+    is_tag_only: bool,
 }
 
 impl Reading {
@@ -30,12 +31,20 @@ impl Reading {
             data.exec_map(reading)
         };
 
-        Reading { tag, value }
+        Reading {
+            tag,
+            value,
+            is_tag_only: data.is_tag_only(),
+        }
     }
 }
 
 impl fmt::Display for Reading {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}{}{}", self.tag, SEPARATOR, self.value)
+        if self.is_tag_only {
+            write!(f, "{}", self.tag)
+        } else {
+            write!(f, "{}{}{}", self.tag, SEPARATOR, self.value)
+        }
     }
 }

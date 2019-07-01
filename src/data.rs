@@ -47,4 +47,8 @@ impl Data {
             None => arg,
         }
     }
+
+    pub fn is_tag_only(&self) -> bool {
+        self.path.is_none() && self.map.is_none()
+    }
 }
