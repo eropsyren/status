@@ -1,5 +1,6 @@
 mod config;
+mod data;
 mod reading;
 
-pub use config::data;
+pub use config::get_data;
 pub use reading::Reading;
