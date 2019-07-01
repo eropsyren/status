@@ -1,11 +1,10 @@
+use crate::data::Data;
+
 pub const SEPARATOR: &'static str = ": ";
 pub const FNF: &'static str = "---";
 
-pub fn data<'a>() -> Vec<(&'a str, &'a str, &'a dyn Fn(String) -> String)> {
-
-    let data: [(&str, &str, &dyn Fn(String) -> String); 0] = [
-
-    ];
-
-    data.to_vec()
+pub fn get_data<'a>() -> Vec<Data> {
+    vec![
+        
+    ]
 }

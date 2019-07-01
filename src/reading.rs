@@ -1,25 +1,33 @@
 use std::fmt;
 use std::fs;
 
-use crate::config::SEPARATOR;
 use crate::config::FNF;
+use crate::config::SEPARATOR;
+use crate::data::Data;
 
 pub struct Reading {
-    tag: String,
+    tag: &'static str,
     value: String,
 }
 
 impl Reading {
-    pub fn from(tag: &str, path: &str, mapping: &dyn Fn(String) -> String) -> Reading {
-        let tag = String::from(tag);
-        let reading = match fs::read_to_string(path) {
-            Ok(val) => val,
-            Err(_) => String::from(FNF),
+    pub fn from(data: &Data) -> Reading {
+        let tag = data.get_tag();
+
+        let reading = match data.get_path() {
+            Some(path) => match fs::read_to_string(path) {
+                Ok(val) => val,
+                Err(_) => String::from(FNF),
+            },
+            None => String::from(""),
         };
-        let value = if reading != FNF {
-            mapping(String::from(reading.trim()))
+
+        let value = if reading == FNF {
+            reading
+        } else if reading == "" {
+            reading
         } else {
-            String::from(FNF)
+            data.exec_map(reading)
         };
 
         Reading { tag, value }

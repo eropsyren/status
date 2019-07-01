@@ -1,16 +1,16 @@
 extern crate status;
 
-use status::{data, Reading};
+use status::{get_data, Reading};
 use std::{thread, time};
 
 fn main() {
-    let data = data();
+    let data = get_data();
 
     loop {
         clear();
 
         for datum in &data {
-            println!("{}", Reading::from(datum.0, datum.1, datum.2));
+            println!("{}", Reading::from(datum));
         }
 
         thread::sleep(time::Duration::from_secs(1));
